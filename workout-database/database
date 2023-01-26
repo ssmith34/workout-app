@@ -1,0 +1,60 @@
+BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS profile, history, exercise;
+
+DROP SEQUENCE IF EXISTS seq_profile_id, seq_history_id, seq_exercise_id;
+
+-- Sequence to start user_id values at 1001 instead of 1
+CREATE SEQUENCE seq_profile_id
+  INCREMENT BY 1
+  START WITH 1001
+  NO MAXVALUE;
+
+CREATE TABLE profile (
+	id int NOT NULL DEFAULT nextval('seq_profile_id'),
+	username varchar(50) NOT NULL,
+	password_hash varchar(200) NOT NULL,
+	history_id int NOT NULL,
+	age int NOT NULL,
+	member_since date,
+	weight float NOT NULL,
+	sex char (1) NOT NULL,
+	CONSTRAINT PK_id_profile PRIMARY KEY (id),
+	CONSTRAINT UQ_id UNIQUE (id)
+);
+
+-- Sequence to start account_id values at 2001 instead of 1
+-- Note: Use similar sequences with unique starting values for additional tables
+CREATE SEQUENCE seq_history_id
+  INCREMENT BY 1
+  START WITH 2001
+  NO MAXVALUE;
+
+CREATE TABLE history (
+	id int NOT NULL DEFAULT nextval('seq_history_id'),
+	profile_id int NOT NULL,
+	exercise_id int NOT NULL,
+	workout_date date NOT NULL,
+	notes varchar(500),
+	sets int,
+	reps int,
+	weight float,
+	CONSTRAINT PK_history PRIMARY KEY (id),
+	CONSTRAINT FK_history_profile FOREIGN KEY (profile_id) REFERENCES profile (id)
+);
+
+CREATE SEQUENCE seq_exercise_id
+	increment by 1
+	start with 3001
+	no maxvalue;
+	
+CREATE TABLE exercise (
+	id int NOT NULL DEFAULT nextval('seq_exercise_id'),
+	exercise_name varchar(100) NOT NULL, 
+	description varchar(500) NOT NULL,
+	category varchar (50) NOT NULL,
+	CONSTRAINT PK_exercise PRIMARY KEY (id),
+	CONSTRAINT CHK_category CHECK (category IS NOT NULL AND category IN('Shoulders', 'Chest', 'Back', 'Forearms', 'Abs', 'Lower Back', 'Hamstrings', 'Calves', 'Glutes', 'Quadriceps'))
+	);
+	
+COMMIT;
