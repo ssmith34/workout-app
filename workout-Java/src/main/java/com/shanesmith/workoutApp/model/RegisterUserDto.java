@@ -1,11 +1,12 @@
 package com.shanesmith.workoutApp.model;
 
-/**
- * DTO for storing a user's credentials.
- */
-public class LoginDto {
+import javax.validation.constraints.NotEmpty;
 
+public class RegisterUserDto {
+
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
 
     public String getUsername() {
@@ -22,13 +23,5 @@ public class LoginDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginDTO{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

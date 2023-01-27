@@ -1,12 +1,9 @@
 package com.shanesmith.workoutApp.model;
 
-/**
- * DTO for storing a user's credentials.
- */
-public class LoginDto {
+public class UserListDto {
 
     private String username;
-    private String password;
+    private int userId;
 
     public String getUsername() {
         return username;
@@ -16,19 +13,19 @@ public class LoginDto {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
-        return "LoginDTO{" +
+        return "UserListDTO{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", userId=" + userId +
                 '}';
     }
 }

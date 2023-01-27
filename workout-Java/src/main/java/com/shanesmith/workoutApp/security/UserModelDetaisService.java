@@ -1,5 +1,6 @@
 package com.shanesmith.workoutApp.security;
 
+import com.shanesmith.workoutApp.dao.UserDao;
 import com.shanesmith.workoutApp.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
